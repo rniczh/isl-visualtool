@@ -1,3 +1,6 @@
 [submodule "isl"]
 	path = isl
 	url = git://repo.or.cz/isl.git
+[submodule "matplotlib-cpp"]
+	path = matplotlib-cpp
+	url = git@github.com:lava/matplotlib-cpp.git
