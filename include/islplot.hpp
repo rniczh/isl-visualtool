@@ -7,29 +7,30 @@
 
 #include "isl/space.h"
 #include "isl/id.h"
+
+#include "isl_coordinates.hpp"
+#include "plot_engine.hpp"
+
 #include <vector>
 #include <map>
 
 namespace {
 
+class Plane {
+
+
+
+};
+
 class Polygon {
-  using Point = std::pair<long, long>;
-  using Points = std::vector<Point>;
+  // using Point = std::pair<long, long>;
+  // using Points = std::vector<Point>;
 
 public:
   void add_point(Point p) { points.push_back(p); }
 
 private:
   Points points;
-};
-
-class Coordinate {
-public:
-  Coordinate();
-
-private:
-  // std::map<isl_id, Polygon> polygons;
-  // std::vector<Polygon> polygons;
 };
 
 } // namespace
@@ -39,7 +40,7 @@ namespace islv {
 /// This is the majaor class for using ISL visualization tool.
 class ISLVContext {
 public:
-  ISLVContext() {};
+  ISLVContext(PlotEngine &engine) : plot_engine(engine) {};
   ISLVContext(ISLVContext &) = delete;
   ISLVContext &operator=(const ISLVContext &) = delete;
   ~ISLVContext() {};
@@ -52,11 +53,9 @@ public:
   isl_stat plot(isl_map *);
   isl_stat plot(isl_basic_map *);
 
-  void plot_map(isl_map *map);
-
 private:
   std::vector<Coordinate> coordinates;
-
+  PlotEngine &plot_engine;
 };
 
 } // namespace islv

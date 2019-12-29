@@ -1,7 +1,7 @@
 #pragma once
 
-#include "isl/set.h"
 #include "isl/point.h"
+#include "isl/set.h"
 
 #include <iostream>
 #include <vector>
@@ -15,4 +15,13 @@ isl_stat extract_coordinate(isl_point *p, void *v);
 struct TransferObject {
   isl_size dim;
   Points &points;
+};
+
+class Coordinate {
+public:
+  Coordinate();
+
+private:
+  // std::map<isl_id, Polygon> polygons;
+  // std::vector<Polygon> polygons;
 };
