@@ -22,36 +22,19 @@ isl_stat ISLVContext::plot(isl_union_set *uset) {
 }
 
 isl_stat ISLVContext::plot(isl_set *set) {
-  isl_size dim = isl_set_dim(set, isl_dim_set);
-
-  std::vector<std::string> id_string_vec;
-
-  // Extract the dimension 'naming' from the set
-  for (isl_size i = 0; i < dim; ++i) {
-    id_string_vec.push_back(
-        isl_id_get_name(isl_set_get_dim_id(set, isl_dim_set, i)));
-  }
-
-  Points points;
-  TransferObject object{
-      dim,
-      points,
-  };
-
-  // extract coordinate from the set and store into the object
-  isl_stat status = isl_set_foreach_point(set, extract_coordinate, &object);
-  if (status == isl_stat_error) {
-    return status;
-  }
-
-  isl_space *space = isl_set_get_space(set);
-  isl_size space_dim = isl_space_dim(space, isl_dim_set);
-  isl_id *id = isl_space_get_dim_id(space, isl_dim_set, 0);
-
   // construct a visual object
-  VisualObject visual_object;
+  std::cout << "[ISL PLOT]\nplot: " << isl_set_to_str(set) << std::endl;
 
-  plot_engine.flush();
+  islgen::VisualObject visual_object = islgen::parse_from_isl_data(set);
+
+  // VisualObject visual_object;
+  // //   statment name
+  // //   demision name vector
+  // //   points vec
+  // visual_object.add_statement(isl_set_get_tuple_name(set), id_string_vec,
+  //                             object.points);
+
+  // plot_engine.flush();
 
   // plot_engine.attach(visual_object);
 
@@ -59,26 +42,7 @@ isl_stat ISLVContext::plot(isl_set *set) {
   // visual_object.add_statement();
 
   //   isl pattern: (with isl language)
-  std::cout << "[ISL PLOT]\nplot: " << isl_set_to_str(set) << std::endl;
-  //   statement name:
-  std::cout << "statement name: ";
-  std::cout << isl_set_get_tuple_name(set) << std::endl;
-  //   demision name:
-  std::cout << "demision name: ";
-  for (auto &s : id_string_vec) {
-    std::cout << s << " ";
-  }
-  std::cout << "\n";
-  //   points:
-  std::cout << "set points: \n";
-  for (auto &p : object.points) {
-    std::cout << "( ";
-    for (auto &d : p) {
-      std::cout << d << " ";
-    }
-    std::cout << ")";
-  }
-  std::cout << std::endl;
+
   // for (auto &p : object.points) {
   //   // dim_x.push_back(p.at(0));
   //   // dim_y.push_back(p.at(1));

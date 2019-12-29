@@ -8,13 +8,15 @@
 namespace islv {
 class PlotEngine {
 public:
-  void attach(VisualObject &);
+  PlotEngine();
+  void attach(islgen::VisualObject &);
   void set_width_height(size_t width, size_t height);
   void clear();
   void flush();
+
 private:
-  std::string title;
-  std::pair<int, int> interval;
+  std::string title = "";
+  std::pair<int, int> interval = std::make_pair(0,10);
 };
 } // namespace islv
 

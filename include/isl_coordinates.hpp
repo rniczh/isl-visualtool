@@ -1,7 +1,13 @@
 #pragma once
 
 #include "isl/point.h"
+#include "isl/map.h"
 #include "isl/set.h"
+#include "isl/union_map.h"
+#include "isl/union_set.h"
+
+#include "isl/space.h"
+#include "isl/id.h"
 
 #include <iostream>
 #include <vector>
