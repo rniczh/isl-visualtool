@@ -1,7 +1,9 @@
 #pragma once
 
 #include "isl_coordinates.hpp"
+#include "isl_schedule.hpp"
 
+#include <array>
 #include <string>
 
 namespace {
@@ -17,9 +19,12 @@ enum visual_type {
 
 class VisualObject {
 public:
-  unsigned int parametric_value;
+  // std::string color = "#000000"; // hexcode
+  unsigned int parametric_value = 6;
+  std::string set_name;
   Points points;
   Arrows arrows;
+  std::pair<int, int> interval;
   void add_statement(std::string set_name,
                      std::vector<std::string> dim_name_vec, Points points);
 
@@ -67,8 +72,10 @@ template <typename isl_data> VisualObject parse_from_isl_data(isl_data *data) {
     //   points vec
     res.add_statement(isl_set_get_tuple_name(data), id_string_vec,
                       object.points);
+
     return res;
 
+    //
   } else if (typeid(isl_data *) == typeid(isl_map *)) {
     // std::cout << "visual object parse from map\n";
     // TODO
@@ -77,6 +84,17 @@ template <typename isl_data> VisualObject parse_from_isl_data(isl_data *data) {
   }
 
   return res;
+}
+
+template <typename isl_data> VisualObject gen_visual_object(isl_data *data) {
+  VisualObject vo = parse_from_isl_data(data);
+
+
+  // TODO
+  // schedule the visual object
+  //   size of the point, that should depend on the figure size
+
+  return vo;
 }
 
 } // namespace islgen

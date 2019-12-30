@@ -6,17 +6,26 @@
 #include "isl_generator.hpp"
 
 namespace islv {
+
+// CRTP TODO
+class PointsPicture {           // 2D
+public:
+  std::vector<long> xpoints;
+  std::vector<long> ypoints;
+};
+
+
 class PlotEngine {
 public:
   PlotEngine();
   void attach(islgen::VisualObject &);
-  void set_width_height(size_t width, size_t height);
   void clear();
   void flush();
 
-private:
+  std::pair<int, int> interval = std::make_pair(0, 10);
   std::string title = "";
-  std::pair<int, int> interval = std::make_pair(0,10);
+  std::vector<PointsPicture> points_pictures;
+private:
 };
 } // namespace islv
 

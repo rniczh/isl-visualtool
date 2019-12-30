@@ -1,22 +1,26 @@
 #include "isl_generator.hpp"
 #include "isl_schedule.hpp"
-#include <vector>
 #include <typeinfo>
+#include <vector>
 
 // TODO
 using namespace islgen;
 
 
+// template <typename isl_data> VisualObject parse(isl_data *data) {
+//   VisualObject res;
+//   return res;
+// }
 
-template <typename isl_data> VisualObject parse(isl_data *data) {
-  VisualObject res;
-  return res;
-}
 
 void VisualObject::add_statement(std::string set_name,
                                  std::vector<std::string> dim_name_vec,
                                  Points points) {
   // TODO
+  this->points = points;
+  // this->dim_name_vec = dim_name_vec;
+  this->set_name = set_name;
+
   // DEBUG
   //   statement name:
   std::cout << "statement name: ";

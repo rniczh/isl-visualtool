@@ -2,6 +2,9 @@
 
 #include "isl_coordinates.hpp"
 
+namespace islsched {
+
+}
 
 // namespace {
 //   using Arrows = std::vector<std::pair<Point, Point>>;

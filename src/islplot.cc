@@ -25,8 +25,12 @@ isl_stat ISLVContext::plot(isl_set *set) {
   // construct a visual object
   std::cout << "[ISL PLOT]\nplot: " << isl_set_to_str(set) << std::endl;
 
-  islgen::VisualObject visual_object = islgen::parse_from_isl_data(set);
 
+  islgen::VisualObject visual_object = islgen::gen_visual_object(set);
+
+  plot_engine.attach(visual_object);
+  plot_engine.flush();
+  // plot_engine.interval = std::make_pair(visual_object.interval);
   // VisualObject visual_object;
   // //   statment name
   // //   demision name vector
